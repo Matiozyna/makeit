@@ -91,7 +91,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Headline - Resized to match Drewl proportions precisely */}
-        <h1 className="flex flex-col items-center gap-0 mb-8 relative">
+        <h1 className="flex flex-col items-center gap-0 mb-8 relative max-w-5xl mx-auto">
           
           {/* Ambient, wide multi-color glow (Mesh Gradient style) */}
           <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[900px] h-[300px] pointer-events-none -z-20">
@@ -103,38 +103,43 @@ export default function Hero() {
 
           <motion.span
             {...fadeUp(0.35)}
-            className="font-sans font-medium text-[48px] sm:text-[56px] md:text-[68px] lg:text-[76px] text-[#111111] tracking-[-0.04em] leading-[1.05]"
+            className="font-display font-medium text-[48px] sm:text-[56px] md:text-[68px] lg:text-[76px] text-[#111111] tracking-[-0.04em] leading-[1.05] text-center"
           >
-            Obecność, która
+            Twój biznes jest dobry,
           </motion.span>
-          <motion.div {...fadeUp(0.5)} className="relative inline-block mt-[-2px]">
+          <motion.div {...fadeUp(0.5)} className="relative inline-block mt-[-2px] text-center">
             <span
-              className="font-sans font-medium text-[48px] sm:text-[56px] md:text-[68px] lg:text-[76px] tracking-[-0.04em] leading-[1.05] gradient-text relative z-10"
+              className="font-display font-medium text-[48px] sm:text-[56px] md:text-[68px] lg:text-[76px] tracking-[-0.04em] leading-[1.05] text-[#111111]"
             >
-              sprzedaje.
+              ale internet o tym{" "}
             </span>
-            {/* The animated swoosh matching the gradient */}
-            <svg 
-              className="absolute -bottom-2 left-0 w-[105%] h-[20px] overflow-visible -translate-x-[2.5%] z-20" 
-              viewBox="0 0 400 30" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
+            <span
+              className="font-display font-medium text-[48px] sm:text-[56px] md:text-[68px] lg:text-[76px] tracking-[-0.04em] leading-[1.05] gradient-text relative z-10"
             >
-              <path 
-                className="swoosh-path"
-                d="M 5 20 Q 150 0 395 15" 
-                stroke="url(#paint0_linear)" 
-                strokeWidth="5" 
-                strokeLinecap="round" 
-              />
-              <defs>
-                <linearGradient id="paint0_linear" x1="5" y1="10" x2="395" y2="10" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#4EA8FF" />
-                  <stop offset="1" stopColor="#9B66FF" />
-                </linearGradient>
-              </defs>
-            </svg>
+              nie wie.
+              {/* The animated swoosh matching the gradient */}
+              <svg 
+                className="absolute -bottom-1 left-0 w-[110%] h-[20px] overflow-visible -translate-x-[5%] z-20" 
+                viewBox="0 0 400 30" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none"
+              >
+                <path 
+                  className="swoosh-path"
+                  d="M 5 20 Q 150 0 395 15" 
+                  stroke="url(#paint0_linear)" 
+                  strokeWidth="5" 
+                  strokeLinecap="round" 
+                />
+                <defs>
+                  <linearGradient id="paint0_linear" x1="5" y1="10" x2="395" y2="10" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#4EA8FF" />
+                    <stop offset="1" stopColor="#9B66FF" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
           </motion.div>
         </h1>
 

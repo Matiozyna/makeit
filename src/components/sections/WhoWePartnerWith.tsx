@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 const partners = [
   {
     type: "Firmy usługowe",
@@ -29,33 +25,25 @@ const partners = [
   },
 ];
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 32 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: "easeOut" as const },
-});
-
 export default function WhoWePartnerWith() {
   return (
     <section className="bg-white py-24 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div {...fadeUp(0)} className="text-center mb-14">
-          <h2 className="font-sans font-medium text-4xl sm:text-5xl text-[#111111] mb-4">
+        <div className="text-center mb-14">
+          <h2 className="font-display font-medium text-4xl sm:text-5xl text-[#111111] mb-4">
             Z kim współpracujemy
           </h2>
           <p className="font-sans text-base text-[#666666] max-w-lg mx-auto leading-relaxed">
             Nasze doświadczenie w designie i marketingu — dopasowane do Twojego biznesu.
           </p>
-        </motion.div>
+        </div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {partners.map((p, i) => (
-            <motion.div
+            <div
               key={i}
-              {...fadeUp(0.1 + i * 0.1)}
               className={`rounded-3xl p-8 bg-gradient-to-br ${p.gradient} border border-white/60 flex flex-col gap-6 relative overflow-hidden`}
             >
               {/* Blob decoration */}
@@ -69,7 +57,7 @@ export default function WhoWePartnerWith() {
                 <p className="font-sans text-xs font-semibold text-[#888888] uppercase tracking-widest mb-1.5">
                   {p.subtitle}
                 </p>
-                <h3 className="font-sans font-semibold text-xl text-[#111111]">
+                <h3 className="font-display font-semibold text-xl text-[#111111]">
                   {p.type}
                 </h3>
               </div>
@@ -90,7 +78,7 @@ export default function WhoWePartnerWith() {
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,14 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
-
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: "easeOut" as const },
-});
 
 export default function ContactCTA() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
@@ -27,8 +19,8 @@ export default function ContactCTA() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Left */}
-          <motion.div {...fadeUp(0)}>
-            <h2 className="font-sans font-medium text-4xl sm:text-5xl text-white leading-tight mb-4">
+          <div>
+            <h2 className="font-display font-medium text-4xl sm:text-5xl text-white leading-tight mb-4">
               Dostań bezpłatną{" "}
               <span className="inline-flex items-center bg-white/10 border border-white/20 rounded-full px-3 py-1 text-sm font-semibold text-white mx-1">
                 💬 sprawdź!
@@ -65,10 +57,10 @@ export default function ContactCTA() {
                 Zarezerwuj rozmowę →
               </a>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right — form */}
-          <motion.div {...fadeUp(0.15)}>
+          <div>
             {sent ? (
               <div className="bg-white/5 border border-white/10 rounded-3xl p-10 flex flex-col items-center justify-center text-center gap-4 min-h-[400px]">
                 <div className="w-14 h-14 rounded-full bg-[#9B66FF]/20 flex items-center justify-center text-2xl">✓</div>
@@ -141,7 +133,7 @@ export default function ContactCTA() {
                 </button>
               </form>
             )}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

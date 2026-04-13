@@ -1,12 +1,27 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+const satoshi = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-Variable.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Satoshi_Complete/Fonts/WEB/fonts/Satoshi-VariableItalic.woff2",
+      style: "italic",
+    },
+  ],
+  variable: "--font-satoshi",
+  display: "swap",
+});
+
+const cabinetGrotesk = localFont({
+  src: "../../public/fonts/CabinetGrotesk_Complete/Fonts/WEB/fonts/CabinetGrotesk-Variable.woff2",
+  variable: "--font-cabinet",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="pl"
-      className={`${inter.variable} h-full antialiased`}
+      className={`${satoshi.variable} ${cabinetGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>

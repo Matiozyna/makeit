@@ -5,7 +5,6 @@ import OurWork from "@/components/sections/OurWork";
 import HowWeHelp from "@/components/sections/HowWeHelp";
 import WhoWePartnerWith from "@/components/sections/WhoWePartnerWith";
 import ContactCTA from "@/components/sections/ContactCTA";
-import WhatPeopleSay from "@/components/sections/WhatPeopleSay";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -19,7 +18,6 @@ export default function Home() {
         <HowWeHelp />
         <WhoWePartnerWith />
         <ContactCTA />
-        <WhatPeopleSay />
       </main>
       <Footer />
     </>

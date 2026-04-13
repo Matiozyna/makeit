@@ -1,7 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
 import React from "react";
+import { createAvatar } from "@dicebear/core";
+import { notionists } from "@dicebear/collection";
+
+function avatarSrc(seed: string): string {
+  const svg = createAvatar(notionists, { seed }).toString();
+  return `data:image/svg+xml;charset=utf8,${encodeURIComponent(svg)}`;
+}
 
 const testimonials = [
   {
@@ -64,14 +70,8 @@ export default function WhatPeopleSay() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center mb-24 relative"
-        >
-          <h2 className="font-sans font-medium text-[48px] sm:text-[56px] text-[#111111] tracking-[-0.04em] flex flex-wrap justify-center items-center gap-4">
+        <div className="text-center mb-24 relative">
+          <h2 className="font-display font-medium text-[48px] sm:text-[56px] text-[#111111] tracking-[-0.04em] flex flex-wrap justify-center items-center gap-4">
             Dlaczego klienci
             <div className="relative inline-flex flex-col items-center justify-center">
               {/* Tooltip pill above */}
@@ -87,17 +87,13 @@ export default function WhatPeopleSay() {
             </div>
             Make it
           </h2>
-        </motion.div>
+        </div>
 
         {/* Testimonials Grid (Bento style) */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {testimonials.map((t, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
               className="bg-white rounded-[24px] sm:rounded-[32px] p-8 sm:p-10 border border-[#E5E5E5] shadow-[0_8px_30px_rgba(0,0,0,0.04)] flex flex-col justify-between"
             >
               <div>
@@ -119,12 +115,15 @@ export default function WhatPeopleSay() {
               <div>
                 <div className="border-t border-dashed border-[#E5E5E5] w-full mb-6" />
                 <div className="flex items-center gap-4">
-                  {/* Using gray placeholder if image fails, but ideally an image */}
-                  <div className="w-12 h-12 rounded-full bg-[#E5E5E5] overflow-hidden shrink-0">
-                    <div className="w-full h-full bg-[#D4D4D4] flex items-center justify-center font-bold text-white text-lg">
-                      {t.name.charAt(0)}
-                    </div>
-                  </div>
+                  {/* Notion-style avatar — generated locally from seed, no external deps */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={avatarSrc(t.name)}
+                    alt={t.name}
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 rounded-full shrink-0 object-cover bg-[#EBE9E4]"
+                  />
                   <div>
                     <h4 className="font-sans font-semibold text-[15px] text-[#111111] leading-tight">
                       {t.name}
@@ -135,7 +134,7 @@ export default function WhatPeopleSay() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

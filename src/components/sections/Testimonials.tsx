@@ -1,6 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { createAvatar } from "@dicebear/core";
+import { notionists } from "@dicebear/collection";
+
+function avatarSrc(seed: string): string {
+  const svg = createAvatar(notionists, { seed }).toString();
+  return `data:image/svg+xml;charset=utf8,${encodeURIComponent(svg)}`;
+}
 
 const testimonials = [
   {
@@ -66,13 +72,6 @@ const testimonials = [
   },
 ];
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 32 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: "easeOut" as const },
-});
-
 export default function Testimonials() {
   return (
     <section className="bg-[#F2F2F4] pt-0 pb-20" style={{ position: "relative" }}>
@@ -94,8 +93,8 @@ export default function Testimonials() {
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
-        <motion.div {...fadeUp(0)} className="text-center mb-14">
-          <h2 className="font-sans font-medium text-[40px] sm:text-[48px] text-[#111111] inline-flex flex-wrap items-center justify-center gap-x-3 leading-tight">
+        <div className="text-center mb-14">
+          <h2 className="font-display font-medium text-[40px] sm:text-[48px] text-[#111111] inline-flex flex-wrap items-center justify-center gap-x-3 leading-tight">
             <span>Dlaczego klienci</span>
 
             {/* Sticker icon — dark rounded square with heart + floating "ufają" label */}
@@ -129,14 +128,13 @@ export default function Testimonials() {
             {/* Decorative arrows */}
             <span className="text-[#CCCCCC] text-xl font-light ml-1 tracking-tighter hidden sm:inline">››</span>
           </h2>
-        </motion.div>
+        </div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {testimonials.map((t, i) => (
-            <motion.div
+            <div
               key={i}
-              {...fadeUp(0.08 + i * 0.1)}
               className="bg-white rounded-2xl p-7 flex flex-col border border-[#E8E8EA] shadow-sm"
             >
               {/* Company logo */}
@@ -152,13 +150,15 @@ export default function Testimonials() {
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                {/* Grayscale avatar placeholder */}
-                <div className="w-10 h-10 rounded-full shrink-0 bg-gradient-to-br from-[#D0D0D0] to-[#B0B0B0] flex items-center justify-center overflow-hidden">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="8" r="4" fill="#888888"/>
-                    <path d="M4 20c0-4.418 3.582-8 8-8s8 3.582 8 8" fill="#888888"/>
-                  </svg>
-                </div>
+                {/* Notion-style avatar — generated locally from seed, no external deps */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={avatarSrc(t.name)}
+                  alt={t.name}
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-full shrink-0 object-cover bg-[#EBE9E4]"
+                />
                 <div>
                   <p className="font-sans text-sm font-semibold text-[#111111] leading-none mb-0.5">
                     {t.name}
@@ -166,7 +166,7 @@ export default function Testimonials() {
                   <p className="font-sans text-xs text-[#999999]">{t.title}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

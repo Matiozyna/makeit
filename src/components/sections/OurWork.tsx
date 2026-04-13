@@ -1,139 +1,151 @@
-"use client";
+import Image from "next/image";
+import Link from "next/link";
 
-import { motion } from "framer-motion";
+// Używamy statycznych importów, aby Next.js automatycznie zaczytał wymiary i proporcje obrazków.
+// Zapobiega to ucinaniu i pozwala na idealne dopasowanie kontenera do faktycznego zdjęcia.
+import zielonyImg from "../../../public/portfolio/zielonywarsztat.webp";
+import artavenueImg from "../../../public/portfolio/artavenue5.webp";
+import golaszewskaImg from "../../../public/portfolio/golaszewska.webp";
+import jotkaImg from "../../../public/portfolio/jotka.webp";
+import trinityImg from "../../../public/portfolio/trinity.webp";
+import offscriptImg from "../../../public/portfolio/offscript.webp";
 
 const projects = [
   {
-    name: "Trinity Power",
-    description: "Platforma e-learningowa dla firmy energetycznej. Kompleksowy projekt od UX po wdrożenie.",
-    tags: ["Next.js", "Web App", "E-learning"],
-    gradient: "from-[#1a1a2e] via-[#16213e] to-[#0f3460]",
-    accent: "#e94560",
+    name: "Zielony Warsztat",
+    description: "Kompleksowy redesign oparty na autorskim systemie, który zoptymalizował workflow i zwiększył konwersję.",
+    tags: ["Atomic Systems", "Enterprise", "UI/UX"],
+    image: zielonyImg,
+    width: 2,
   },
   {
-    name: "Zielony Warsztat",
-    description: "Strona firmowa dla studia ogrodniczego. Minimalistyczny design z pełnym CMS.",
-    tags: ["Strona firmowa", "CMS"],
-    gradient: "from-[#134e4a] via-[#065f46] to-[#064e3b]",
-    accent: "#6ee7b7",
+    name: "Art Avenue",
+    description: "Platforma e-commerce o oszałamiającym wyglądzie, która podniosła prestiż marki i konwersję.",
+    tags: ["E-commerce", "Web Design", "Next.js"],
+    image: artavenueImg,
+    width: 1,
   },
   {
     name: "Patrycja Gołaszewska",
-    description: "Landing page dla kursu beauty. Wysoka konwersja dzięki przemyślanemu copy i UX.",
-    tags: ["Landing page", "Kursy online"],
-    gradient: "from-[#4c1d95] via-[#6d28d9] to-[#7c3aed]",
-    accent: "#c4b5fd",
+    description: "Wysoko konwertujący landing page zaprojektowany do zbierania leadów i sprzedaży ekskluzywnych kursów.",
+    tags: ["Landing Page", "Conversion", "UI"],
+    image: golaszewskaImg,
+    width: 1,
   },
   {
-    name: "Bloom Kwiaty",
-    description: "Sesja wizerunkowa dla kwiaciarni. Zdjęcia produktowe i portrety właścicielki.",
-    tags: ["Fotografia", "Branding"],
-    gradient: "from-[#831843] via-[#be185d] to-[#db2777]",
-    accent: "#fbcfe8",
+    name: "Jotka",
+    description: "Minimalistyczne portfolio artystyczne z płynnymi animacjami i perfekcyjną typografią.",
+    tags: ["Portfolio", "Framer Motion", "Minimalist"],
+    image: jotkaImg,
+    width: 2,
   },
   {
-    name: "Golden Jewel",
-    description: "Profesjonalna sesja produktowa biżuterii na białym tle i w aranżacji lifestyle.",
-    tags: ["Fotografia produktowa"],
-    gradient: "from-[#78350f] via-[#92400e] to-[#b45309]",
-    accent: "#fde68a",
+    name: "Trinity Power",
+    description: "Innowacyjna platforma e-learningowa. Skalowalne rozwiązanie do przekazywania wiedzy.",
+    tags: ["E-learning", "Web App", "UX/UI"],
+    image: trinityImg,
+    width: 2,
   },
   {
-    name: "Złoty Karp",
-    description: "Film reklamowy dla restauracji. Ujęcia kuchni, atmosfery i dań w technice cinematic.",
-    tags: ["Wideo", "Reklama"],
-    gradient: "from-[#1e3a5f] via-[#1e40af] to-[#1d4ed8]",
-    accent: "#93c5fd",
+    name: "Offscript",
+    description: "Dynamiczna platforma dla agencji kreatywnej, podkreślająca ich nieszablonowe podejście.",
+    tags: ["Agency", "Branding", "Web Design"],
+    image: offscriptImg,
+    width: 1,
   },
 ];
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 32 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: "easeOut" as const },
-});
-
 export default function OurWork() {
+
   return (
-    <section className="bg-white py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div {...fadeUp(0)} className="flex items-end justify-between mb-12 flex-wrap gap-4">
-          <div>
-            <p className="font-sans text-xs font-semibold text-[#888888] uppercase tracking-widest mb-3">
-              Nasze projekty
-            </p>
-            <h2 className="font-sans font-medium text-4xl sm:text-5xl text-[#111111] leading-tight max-w-lg">
-              Marki z całej Polski. Projekty każdej skali.
+    <section className="bg-[#F9F9F9] py-32 px-6 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header - Zoptymalizowany pod kątem wielkości i detali (Technical Brutalism) */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+          <div className="max-w-2xl">
+            <h2
+              className="font-sans font-semibold text-4xl md:text-5xl lg:text-6xl text-[#111111] leading-[1.05] tracking-[-0.04em] mb-5"
+            >
+              Nasze realizacje.
             </h2>
+
+            <p className="font-sans text-base md:text-lg text-[#666666] leading-relaxed max-w-xl font-normal tracking-tight">
+              Marki z całej Polski. Projekty każdej skali. Każdy przemyślany i zbudowany z obsesją na punkcie detali.
+            </p>
           </div>
-          <a
-            href="#kontakt"
-            className="inline-flex items-center font-sans text-sm font-medium text-[#111111] border border-[#EAEAEA] bg-white hover:border-[#CCCCCC] transition-all duration-200 px-5 py-2.5 rounded-full whitespace-nowrap"
-          >
-            Wszystkie projekty →
-          </a>
-        </motion.div>
+
+          {/* Premium "Magnetic/Hover" Button */}
+          <div>
+            <Link
+              href="/portfolio"
+              className="group relative inline-flex items-center gap-3 font-sans text-[15px] font-semibold text-[#111111] bg-white border border-[#E5E5E5] hover:border-[#111111] px-5 py-2.5 rounded-full transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] overflow-hidden"
+            >
+              <span className="relative z-10 pl-2">Wszystkie projekty</span>
+              <div className="relative z-10 w-8 h-8 rounded-full bg-[#F5F5F7] group-hover:bg-[#111111] transition-colors duration-300 flex items-center justify-center overflow-hidden">
+                {/* Ikonka strzałki, która wyjeżdża i wjeżdża z lewej */}
+                <svg className="w-3.5 h-3.5 text-[#111111] group-hover:text-white transform group-hover:translate-x-[150%] transition-transform duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+                {/* Zapasowa ikonka czekająca po lewej stronie */}
+                <svg className="absolute w-3.5 h-3.5 text-white transform -translate-x-[150%] group-hover:translate-x-0 transition-transform duration-300 ease-in-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </Link>
+          </div>
+        </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-16 gap-x-8 items-start">
           {projects.map((p, i) => (
-            <motion.div
+            <div
               key={i}
-              {...fadeUp(0.05 + i * 0.07)}
-              className="group relative bg-white border border-[#EAEAEA] rounded-3xl overflow-hidden hover:shadow-lg hover:shadow-black/5 transition-all duration-300 cursor-pointer"
+              className={`group flex flex-col ${p.width === 2 ? 'md:col-span-2' : 'md:col-span-1'}`}
             >
-              {/* Image / Thumbnail */}
-              <div
-                className={`relative h-52 bg-gradient-to-br ${p.gradient} overflow-hidden`}
-              >
-                {/* Fake browser chrome */}
-                <div className="absolute top-4 left-4 right-4 bg-white/10 backdrop-blur-sm rounded-xl h-full max-h-36 border border-white/20">
-                  <div className="flex items-center gap-1.5 px-3 py-2.5 border-b border-white/10">
-                    <span className="w-2 h-2 rounded-full bg-white/30" />
-                    <span className="w-2 h-2 rounded-full bg-white/30" />
-                    <span className="w-2 h-2 rounded-full bg-white/30" />
-                    <div className="flex-1 mx-2 h-1.5 bg-white/15 rounded-full" />
-                  </div>
-                  <div className="p-3 space-y-1.5">
-                    <div className="h-1.5 bg-white/20 rounded-full w-3/4" />
-                    <div className="h-1.5 bg-white/15 rounded-full w-1/2" />
-                    <div className="h-1.5 bg-white/10 rounded-full w-2/3" />
+              {/* Image Container */}
+              <div className="relative w-full rounded-[32px] bg-[#F9F9F9] overflow-hidden mb-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-all duration-500 transform group-hover:-translate-y-2">
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
+                  placeholder="blur"
+                  sizes={p.width === 2 ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
+                />
+                
+                {/* Floating "View Project" button */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="bg-white/90 backdrop-blur-sm text-[#111111] font-sans font-semibold text-sm px-6 py-3 rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.12)] flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                    Zobacz projekt
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
                   </div>
                 </div>
-                {/* Accent dot */}
-                <div
-                  className="absolute bottom-4 right-4 w-10 h-10 rounded-full opacity-60"
-                  style={{ background: p.accent }}
-                />
               </div>
 
               {/* Content */}
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-4 mb-2">
-                  <h3 className="font-sans font-semibold text-lg text-[#111111]">
-                    {p.name}
-                  </h3>
-                  <span className="text-[#CCCCCC] group-hover:text-[#111111] transition-colors duration-200 text-lg mt-0.5">
-                    →
-                  </span>
-                </div>
-                <p className="font-sans text-sm text-[#666666] leading-relaxed mb-4">
+              <div className="pr-8">
+                <h3 className="font-display font-semibold text-[26px] text-[#111111] tracking-[-0.04em] mb-3">
+                  {p.name}
+                </h3>
+                <p className="font-sans text-[17px] text-[#666666] leading-relaxed mb-6">
                   {p.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {p.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-sans text-xs font-medium text-[#888888] bg-[#F5F5F7] px-2.5 py-1 rounded-full"
+                      className="font-sans text-[14px] font-bold text-[#888888] bg-[#F0F0F0] px-4 py-1.5 rounded-full tracking-tight"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
