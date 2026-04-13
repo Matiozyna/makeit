@@ -27,6 +27,7 @@ export default function GridBackground() {
 
           <path d="M 60 800 L 60 520 L 180 400" />
           <circle cx="60" cy="520" r="3.5" fill="#F9F9F9" stroke="#D4D4D4" />
+
         </g>
       </svg>
 

@@ -180,16 +180,20 @@ export default function Hero() {
         {/* Fading edges - purely matching the #F9F9F9 background */}
         <div className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-r from-[#F9F9F9] via-transparent to-[#F9F9F9] w-full h-full" />
         
-        {/* Scrolling marquee */}
+        {/* Scrolling marquee — two identical halves for seamless loop */}
         <div className="relative overflow-hidden z-0">
-          <div className="flex gap-16 md:gap-24 items-center animate-[marquee_15s_linear_infinite] whitespace-nowrap">
-            {[...clients, ...clients, ...clients, ...clients].map((name, i) => (
-              <span
-                key={i}
-                className="font-sans text-[22px] md:text-[28px] font-semibold text-[#A3A3A3] transition-all duration-300 cursor-default select-none shrink-0 opacity-70 hover:opacity-100 hover:text-[#111111]"
-              >
-                {name}
-              </span>
+          <div className="flex w-max animate-[marquee_20s_linear_infinite]">
+            {[0, 1].map((half) => (
+              <div key={half} className="flex gap-16 md:gap-24 items-center shrink-0 pr-16 md:pr-24">
+                {clients.map((name) => (
+                  <span
+                    key={`${half}-${name}`}
+                    className="font-sans text-[22px] md:text-[28px] font-semibold text-[#A3A3A3] cursor-default select-none shrink-0 opacity-70"
+                  >
+                    {name}
+                  </span>
+                ))}
+              </div>
             ))}
           </div>
         </div>
