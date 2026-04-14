@@ -1,0 +1,59 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { Bell, Search } from "lucide-react";
+
+const pageNames: Record<string, string> = {
+  "/panel": "Dashboard",
+  "/panel/design-review": "Design Review",
+  "/panel/pliki": "Pliki & Deliverables",
+  "/panel/wiadomosci": "Wiadomosci",
+  "/panel/historia": "Historia decyzji",
+  "/panel/monitoring": "Monitoring & Uptime",
+  "/panel/raporty": "Raporty SEO",
+  "/panel/zgloszenia": "Zgloszenia zmian",
+};
+
+export default function PanelTopBar() {
+  const pathname = usePathname();
+  const pageName = pageNames[pathname] || "Panel";
+
+  return (
+    <header className="h-[56px] px-8 flex items-center justify-between shrink-0 border-b border-[#EBEBEB] bg-[#F9F9F9]">
+      {/* Breadcrumb */}
+      <nav className="flex items-center gap-1.5 font-sans text-[13px]">
+        <Link href="/panel" className="text-[#999999] hover:text-[#666666] transition-colors duration-150">
+          Panel
+        </Link>
+        {pathname !== "/panel" && (
+          <>
+            <span className="text-[#DEDEDE]">/</span>
+            <span className="font-medium text-[#111111]">{pageName}</span>
+          </>
+        )}
+      </nav>
+
+      {/* Actions */}
+      <div className="flex items-center gap-1">
+        <button className="w-8 h-8 rounded-lg flex items-center justify-center text-[#AAAAAA] hover:text-[#666666] hover:bg-black/[0.04] transition-all duration-150">
+          <Search size={15} strokeWidth={1.75} />
+        </button>
+
+        <Link href="/panel/wiadomosci" className="relative w-8 h-8 rounded-lg flex items-center justify-center text-[#AAAAAA] hover:text-[#666666] hover:bg-black/[0.04] transition-all duration-150">
+          <Bell size={15} strokeWidth={1.75} />
+          <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-[#111111]" />
+        </Link>
+
+        <div className="w-px h-4 bg-[#EBEBEB] mx-1" />
+
+        <button className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-black/[0.04] transition-all duration-150">
+          <div className="w-6 h-6 rounded-full bg-[#111111] flex items-center justify-center">
+            <span className="font-sans text-[8px] font-bold text-white">KB</span>
+          </div>
+          <span className="font-sans text-[13px] font-medium text-[#333333]">Kuchciak</span>
+        </button>
+      </div>
+    </header>
+  );
+}

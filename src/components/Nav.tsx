@@ -19,19 +19,19 @@ const serviceCards = [
     title: "Web Design",
     sub: "Strony i sklepy internetowe",
     image: codeImg,
-    href: "#uslugi",
+    href: "/uslugi/web-design",
   },
   {
     title: "Social Media",
     sub: "Content, który sprzedaje",
     image: rocketImg,
-    href: "#uslugi",
+    href: "/uslugi/social-media",
   },
   {
     title: "Foto & Wideo",
     sub: "Profesjonalne sesje i filmy",
     image: cameraImg,
-    href: "#uslugi",
+    href: "/uslugi/foto-wideo",
   },
 ];
 
@@ -161,10 +161,10 @@ export default function Nav() {
         {/* CTAs */}
         <div className="flex items-center gap-3">
           <a
-            href="#kontakt"
-            className="hidden sm:inline-flex font-sans text-[14px] font-medium text-[#111111] hover:text-[#111111] transition-all duration-200 px-5 py-2.5 rounded-full border border-[#EAEAEA] hover:border-[#CCCCCC] bg-white"
+            href="/login"
+            className="hidden sm:inline-flex font-sans text-[14px] font-medium text-[#111111] hover:text-[#111111] transition-all duration-200 px-5 py-2.5 rounded-full border border-[#EAEAEA] hover:border-[#CCCCCC] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
           >
-            Napisz do nas
+            Panel klienta
           </a>
 
           {/* Electric Border Button */}
