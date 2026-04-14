@@ -12,7 +12,7 @@ export default function PanelLayout({
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#F9F9F9]">
+    <div className="flex h-screen overflow-hidden bg-[#F7F7F8]">
       <PanelSidebar
         collapsed={collapsed}
         onToggle={() => setCollapsed(!collapsed)}
@@ -24,7 +24,7 @@ export default function PanelLayout({
       >
         <PanelTopBar />
         <main className="flex-1 overflow-y-auto overflow-x-hidden">
-          <div className="max-w-[1100px] px-8 pt-5 pb-8">
+          <div className="max-w-[1100px] mx-auto px-8 pt-6 pb-10">
             {children}
           </div>
         </main>

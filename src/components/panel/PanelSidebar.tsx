@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   PenLine,
   FolderOpen,
+  CreditCard,
   MessageSquare,
   History,
   ShieldCheck,
@@ -23,6 +24,7 @@ const navGroups = [
       { icon: LayoutDashboard, label: "Dashboard", href: "/panel" },
       { icon: PenLine, label: "Design Review", href: "/panel/design-review" },
       { icon: FolderOpen, label: "Pliki", href: "/panel/pliki" },
+      { icon: CreditCard, label: "Płatności", href: "/panel/platnosci" },
     ],
   },
   {

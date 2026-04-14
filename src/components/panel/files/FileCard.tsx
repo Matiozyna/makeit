@@ -2,15 +2,17 @@
 
 import { Download, Eye } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
-const typeConfig: Record<string, { bg: string; border: string; text: string; label: string }> = {
-  svg: { bg: "bg-violet-50", border: "border-violet-200", text: "text-violet-600", label: "SVG" },
-  pdf: { bg: "bg-rose-50", border: "border-rose-200", text: "text-rose-600", label: "PDF" },
-  webp: { bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-600", label: "WEBP" },
-  png: { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-600", label: "PNG" },
-  jpg: { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-600", label: "JPG" },
-  zip: { bg: "bg-gray-50", border: "border-gray-200", text: "text-gray-600", label: "ZIP" },
-  figma: { bg: "bg-fuchsia-50", border: "border-fuchsia-200", text: "text-fuchsia-600", label: "FIG" },
+// Single neutral config — no color per type, the label is enough
+const typeLabel: Record<string, string> = {
+  svg: "SVG",
+  pdf: "PDF",
+  webp: "WEBP",
+  png: "PNG",
+  jpg: "JPG",
+  zip: "ZIP",
+  figma: "FIG",
 };
 
 interface FileCardProps {
@@ -23,78 +25,65 @@ interface FileCardProps {
 }
 
 export default function FileCard({ name, type, size, date, isNew, preview }: FileCardProps) {
-  const config = typeConfig[type] || typeConfig.pdf;
+  const label = typeLabel[type] ?? type.toUpperCase();
 
   return (
     <motion.div
-      whileHover={{ y: -4, scale: 1.01 }}
-      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative rounded-[20px] border border-[#E5E7EB] bg-white overflow-hidden cursor-pointer
-                 shadow-[0_1px_3px_rgba(0,0,0,0.04)]
-                 hover:shadow-[0_20px_50px_rgba(0,0,0,0.10),0_8px_20px_rgba(0,0,0,0.06)]
-                 hover:border-[#D0D4DB] transition-shadow duration-300"
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative rounded-xl border border-[#EBEBEB] bg-white overflow-hidden cursor-pointer shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:border-[#CCCCCC] hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-200"
     >
-      {/* New badge */}
+      {/* New indicator — minimal, no color */}
       {isNew && (
         <div className="absolute top-3 right-3 z-10">
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-          </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#111111] block" />
         </div>
       )}
 
-      {/* Preview area */}
-      <div className="relative aspect-[4/3] bg-gradient-to-br from-[#F8FAFC] to-[#F0F4F8] flex items-center justify-center overflow-hidden">
+      {/* Preview area — clean light bg */}
+      <div className="relative aspect-[4/3] bg-[#F5F5F5] flex items-center justify-center overflow-hidden">
         {preview ? (
-          <img
+          <Image
             src={preview}
             alt={name}
-            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500"
+            fill
+            className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
           />
         ) : (
-          <>
-            {/* Ambient decoration */}
-            <div className="absolute inset-0 opacity-[0.03]">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full bg-[#4EA8FF] blur-[50px]" />
-            </div>
-            {/* Type badge large */}
-            <div className={`relative w-16 h-16 rounded-[14px] ${config.bg} border ${config.border} flex items-center justify-center backdrop-blur-sm`}>
-              <span className={`font-display text-[18px] font-bold tracking-[-0.02em] ${config.text}`}>
-                {config.label}
-              </span>
-            </div>
-          </>
+          <div className="w-14 h-14 rounded-xl bg-white border border-[#E5E5E5] flex items-center justify-center shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
+            <span className="font-sans text-[13px] font-semibold text-[#AAAAAA]">
+              {label}
+            </span>
+          </div>
         )}
 
-        {/* Hover overlay with actions */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 gap-2">
-          <button className="flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-[#111111] font-sans text-[12px] font-medium px-3.5 py-2 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:bg-white transition-colors">
-            <Eye className="w-3.5 h-3.5" strokeWidth={2} />
+        {/* Hover action bar — white, slides up from bottom */}
+        <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-200 ease-out bg-white/95 border-t border-[#EBEBEB] flex items-center justify-center gap-2 py-2.5 px-4">
+          <button className="flex items-center gap-1.5 font-sans text-[12px] font-medium text-[#555555] hover:text-[#111111] transition-colors duration-150">
+            <Eye size={13} strokeWidth={1.75} />
             Podgląd
           </button>
-          <button className="flex items-center gap-1.5 bg-white/90 backdrop-blur-sm text-[#111111] font-sans text-[12px] font-medium px-3.5 py-2 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:bg-white transition-colors">
-            <Download className="w-3.5 h-3.5" strokeWidth={2} />
+          <span className="w-px h-3.5 bg-[#E5E5E5]" />
+          <button className="flex items-center gap-1.5 font-sans text-[12px] font-medium text-[#555555] hover:text-[#111111] transition-colors duration-150">
+            <Download size={13} strokeWidth={1.75} />
             Pobierz
           </button>
         </div>
       </div>
 
-      {/* Info */}
-      <div className="px-4 py-3.5">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0">
-            <p className="font-sans text-[13px] font-medium text-[#111111] truncate leading-snug">
-              {name}
-            </p>
-            <p className="font-sans text-[11px] text-[#9CA3AF] mt-0.5">
-              {size} · {date}
-            </p>
-          </div>
-          <span className={`shrink-0 font-sans text-[10px] font-semibold ${config.text} ${config.bg} border ${config.border} rounded-full px-2 py-0.5`}>
-            {config.label}
-          </span>
+      {/* Info row */}
+      <div className="px-4 py-3.5 flex items-center justify-between gap-2">
+        <div className="min-w-0">
+          <p className="font-sans text-[13px] font-medium text-[#111111] truncate leading-snug">
+            {name}
+          </p>
+          <p className="font-sans text-[11px] text-[#AAAAAA] mt-0.5">
+            {size} · {date}
+          </p>
         </div>
+        <span className="shrink-0 font-sans text-[10px] font-semibold text-[#AAAAAA] bg-[#F5F5F5] border border-[#EBEBEB] rounded-md px-2 py-0.5">
+          {label}
+        </span>
       </div>
     </motion.div>
   );

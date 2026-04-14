@@ -13,6 +13,7 @@ const pageNames: Record<string, string> = {
   "/panel/monitoring": "Monitoring & Uptime",
   "/panel/raporty": "Raporty SEO",
   "/panel/zgloszenia": "Zgloszenia zmian",
+  "/panel/platnosci": "Płatności",
 };
 
 export default function PanelTopBar() {
@@ -20,7 +21,7 @@ export default function PanelTopBar() {
   const pageName = pageNames[pathname] || "Panel";
 
   return (
-    <header className="h-[56px] px-8 flex items-center justify-between shrink-0 border-b border-[#EBEBEB] bg-[#F9F9F9]">
+    <header className="h-[56px] px-8 flex items-center justify-between shrink-0 border-b border-[#EBEBEB] bg-[#F7F7F8]">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 font-sans text-[13px]">
         <Link href="/panel" className="text-[#999999] hover:text-[#666666] transition-colors duration-150">

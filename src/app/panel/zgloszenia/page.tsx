@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, X, AlertTriangle, Clock, Check, Flame } from "lucide-react";
+import { Plus, X, Check, Clock, Inbox } from "lucide-react";
 
 interface Request {
   id: string;
@@ -11,164 +11,215 @@ interface Request {
   page: string;
   priority: "normal" | "urgent";
   date: string;
-  author: string;
 }
 
 const initialData: Record<string, Request[]> = {
   new: [
-    { id: "1", title: "Zmień tekst na hero", description: "Nagłówek powinien brzmieć: \"Budujemy solidnie od 2005 roku\"", page: "Strona główna", priority: "normal", date: "14 kwi", author: "Kuchciak Budownictwo" },
-    { id: "2", title: "Dodaj numer telefonu w footerze", description: "Brakuje kontaktowego numeru telefonu w stopce.", page: "Wszystkie", priority: "urgent", date: "13 kwi", author: "Kuchciak Budownictwo" },
+    { id: "1", title: "Zmień tekst na hero", description: "Nagłówek powinien brzmieć: \"Budujemy solidnie od 2005 roku\"", page: "Strona główna", priority: "normal", date: "14 kwi" },
+    { id: "2", title: "Dodaj numer telefonu w footerze", description: "Brakuje kontaktowego numeru telefonu w stopce.", page: "Wszystkie", priority: "urgent", date: "13 kwi" },
   ],
   progress: [
-    { id: "3", title: "Nowy baner — promocja wiosenna", description: "Baner 1920x600 z informacją o rabacie -15% na usługi dachowe.", page: "Strona główna", priority: "normal", date: "11 kwi", author: "Kuchciak Budownictwo" },
+    { id: "3", title: "Nowy baner — promocja wiosenna", description: "Baner 1920×600 z informacją o rabacie -15% na usługi dachowe.", page: "Strona główna", priority: "normal", date: "11 kwi" },
   ],
   done: [
-    { id: "4", title: "Aktualizacja menu nawigacji", description: "Dodanie zakładki \"Realizacje\" w menu głównym.", page: "Wszystkie", priority: "normal", date: "8 kwi", author: "Kuchciak Budownictwo" },
-    { id: "5", title: "Poprawka literówki /o-nas", description: "\"Budownictow\" → \"Budownictwo\" w sekcji O nas.", page: "/o-nas", priority: "normal", date: "7 kwi", author: "Kuchciak Budownictwo" },
-    { id: "6", title: "Nowe zdjęcia realizacji", description: "Dodanie 4 nowych zdjęć budowy domku w Niepołomicach.", page: "/realizacje", priority: "normal", date: "5 kwi", author: "Kuchciak Budownictwo" },
+    { id: "4", title: "Aktualizacja menu nawigacji", description: "Dodanie zakładki \"Realizacje\" w menu głównym.", page: "Wszystkie", priority: "normal", date: "8 kwi" },
+    { id: "5", title: "Poprawka literówki /o-nas", description: "\"Budownictow\" → \"Budownictwo\" w sekcji O nas.", page: "/o-nas", priority: "normal", date: "7 kwi" },
+    { id: "6", title: "Nowe zdjęcia realizacji", description: "Dodanie 4 nowych zdjęć budowy domku w Niepołomicach.", page: "/realizacje", priority: "normal", date: "5 kwi" },
   ],
 };
 
 const columns = [
-  { key: "new", label: "Nowe", icon: AlertTriangle, color: "text-amber-600", bg: "bg-amber-50", border: "border-amber-200" },
-  { key: "progress", label: "W toku", icon: Clock, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-200" },
-  { key: "done", label: "Gotowe", icon: Check, color: "text-emerald-600", bg: "bg-emerald-50", border: "border-emerald-200" },
+  { key: "new",      label: "Nowe",   icon: Inbox,  count: initialData.new.length },
+  { key: "progress", label: "W toku", icon: Clock,  count: initialData.progress.length },
+  { key: "done",     label: "Gotowe", icon: Check,  count: initialData.done.length },
 ] as const;
 
 const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 16 } as const,
+  initial: { opacity: 0, y: 12 } as const,
   animate: { opacity: 1, y: 0 } as const,
-  transition: { duration: 0.45, delay, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  transition: { duration: 0.4, delay, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
 });
 
 export default function ZgloszeniaPage() {
   const [showModal, setShowModal] = useState(false);
   const [data] = useState(initialData);
+  const [priority, setPriority] = useState<"normal" | "urgent">("normal");
+
+  const total = Object.values(data).flat().length;
 
   return (
     <>
-      <div className="max-w-[1200px] flex flex-col gap-6">
+      <div className="max-w-[1060px] flex flex-col gap-5">
+
         {/* Header */}
-        <motion.div {...fadeUp(0)} className="flex items-end justify-between">
+        <motion.div {...fadeUp(0)} className="flex items-center justify-between">
           <div>
-            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.15em] text-[#9CA3AF] mb-1">
-              Zgłaszaj zmiany, śledź postępy
-            </p>
             <h1 className="font-display text-[28px] font-bold tracking-[-0.04em] text-[#111111]">
               Zgłoszenia zmian
             </h1>
+            <p className="font-sans text-[14px] text-[#888888] mt-0.5">
+              {data.new.length} nowych · {data.progress.length} w toku · {data.done.length} gotowych · {total} łącznie
+            </p>
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 bg-[#111111] hover:bg-[#000000] text-white font-sans text-[13px] font-medium px-5 py-2.5 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 transition-all duration-200"
+            className="flex items-center gap-2 bg-[#111111] hover:bg-[#2a2a2a] text-white font-sans text-[13px] font-medium px-4 py-2 rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.15)] transition-all duration-150"
           >
-            <Plus className="w-4 h-4" strokeWidth={2} />
+            <Plus size={14} strokeWidth={2.5} />
             Nowe zgłoszenie
           </button>
         </motion.div>
 
         {/* Kanban */}
-        <motion.div {...fadeUp(0.06)} className="grid grid-cols-3 gap-5 items-start">
+        <motion.div {...fadeUp(0.06)} className="grid grid-cols-3 gap-4 items-start">
           {columns.map((col) => {
             const Icon = col.icon;
             const items = data[col.key];
+            const isDone = col.key === "done";
+
             return (
-              <div key={col.key} className="flex flex-col gap-3">
+              <div key={col.key} className="flex flex-col gap-2.5">
+
                 {/* Column header */}
-                <div className="flex items-center gap-2 px-1">
-                  <div className={`w-7 h-7 rounded-[8px] ${col.bg} border ${col.border} flex items-center justify-center`}>
-                    <Icon className={`w-3.5 h-3.5 ${col.color}`} strokeWidth={2} />
+                <div className="flex items-center justify-between px-1 mb-0.5">
+                  <div className="flex items-center gap-2">
+                    <Icon size={14} strokeWidth={1.75} color="#888888" />
+                    <span className="font-sans text-[13px] font-semibold text-[#111111]">
+                      {col.label}
+                    </span>
                   </div>
-                  <span className="font-sans text-[14px] font-medium text-[#111111]">{col.label}</span>
-                  <span className="font-sans text-[12px] font-medium text-[#9CA3AF] bg-[#F5F7FA] rounded-full px-2 py-0.5">
+                  <span className="font-sans text-[11px] font-semibold text-[#888888] bg-[#F0F0F0] rounded-md px-2 py-0.5">
                     {items.length}
                   </span>
                 </div>
 
                 {/* Cards */}
-                <div className="flex flex-col gap-2.5">
-                  {items.map((req, i) => (
-                    <motion.div
-                      key={req.id}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.35, delay: 0.1 + i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-                      whileHover={{ y: -2 }}
-                      className="rounded-[16px] border border-[#E5E7EB] bg-white p-4 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:border-[#D0D4DB] transition-shadow duration-300 cursor-pointer group"
-                    >
-                      <div className="flex items-start justify-between gap-2 mb-2">
-                        <h3 className="font-sans text-[14px] font-medium text-[#111111] leading-snug">
+                {items.map((req, i) => (
+                  <motion.div
+                    key={req.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: isDone ? 0.45 : 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.08 + i * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ y: -1 }}
+                    className={`rounded-xl bg-white border shadow-[0_1px_4px_rgba(0,0,0,0.04)] cursor-pointer overflow-hidden hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-200 ${
+                      req.priority === "urgent"
+                        ? "border-[#111111]"
+                        : "border-[#EBEBEB] hover:border-[#CCCCCC]"
+                    }`}
+                  >
+                    {/* Urgent: top border accent */}
+                    {req.priority === "urgent" && (
+                      <div className="h-[3px] w-full bg-[#111111]" />
+                    )}
+
+                    <div className="p-4">
+                      {/* Title row */}
+                      <div className="flex items-start justify-between gap-2 mb-1.5">
+                        <h3 className="font-sans text-[13px] font-semibold text-[#111111] leading-snug">
                           {req.title}
                         </h3>
                         {req.priority === "urgent" && (
-                          <span className="shrink-0 inline-flex items-center gap-1 font-sans text-[10px] font-semibold bg-rose-50 text-rose-600 border border-rose-200 rounded-full px-2 py-0.5">
-                            <Flame className="w-2.5 h-2.5" strokeWidth={2.5} />
+                          <span className="shrink-0 font-sans text-[10px] font-bold text-[#111111] uppercase tracking-[0.08em]">
                             Pilne
                           </span>
                         )}
                       </div>
-                      <p className="font-sans text-[12px] text-[#6B7280] leading-relaxed line-clamp-2 mb-3">
+
+                      {/* Description */}
+                      <p className="font-sans text-[12px] text-[#888888] leading-relaxed line-clamp-2 mb-3">
                         {req.description}
                       </p>
-                      <div className="flex items-center justify-between">
-                        <span className="font-sans text-[11px] text-[#9CA3AF] bg-[#F5F7FA] rounded-full px-2 py-0.5">
+
+                      {/* Footer meta */}
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-sans text-[11px] font-medium text-[#888888] bg-[#F5F5F5] border border-[#EBEBEB] rounded-md px-2 py-0.5 truncate max-w-[120px]">
                           {req.page}
                         </span>
-                        <span className="font-sans text-[11px] text-[#9CA3AF]">{req.date}</span>
+                        <span className="font-sans text-[11px] text-[#BBBBBB] shrink-0">
+                          {req.date}
+                        </span>
                       </div>
-                    </motion.div>
-                  ))}
-                </div>
+                    </div>
+                  </motion.div>
+                ))}
+
+                {/* Empty state for "new" column */}
+                {col.key === "new" && items.length === 0 && (
+                  <div className="rounded-xl border border-dashed border-[#EBEBEB] p-6 text-center">
+                    <p className="font-sans text-[12px] text-[#CCCCCC]">Brak nowych zgłoszeń</p>
+                  </div>
+                )}
               </div>
             );
           })}
         </motion.div>
       </div>
 
-      {/* New Request Modal */}
+      {/* Modal */}
       <AnimatePresence>
         {showModal && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/30"
             onClick={() => setShowModal(false)}
           >
             <motion.div
-              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              initial={{ opacity: 0, y: 16, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 12, scale: 0.98 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, y: 8, scale: 0.99 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-[480px] mx-6 rounded-[24px] bg-white shadow-[0_24px_80px_rgba(0,0,0,0.15)] p-8"
+              className="w-full max-w-[460px] mx-6 rounded-xl bg-white shadow-[0_8px_40px_rgba(0,0,0,0.12)] overflow-hidden"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="font-display text-[20px] font-bold tracking-[-0.03em] text-[#111111]">
+              {/* Modal header */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-[#EBEBEB]">
+                <h2 className="font-sans text-[15px] font-semibold text-[#111111]">
                   Nowe zgłoszenie
                 </h2>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="w-8 h-8 rounded-full hover:bg-[#F5F7FA] flex items-center justify-center text-[#9CA3AF] hover:text-[#111111] transition-all duration-200"
+                  className="w-7 h-7 rounded-lg hover:bg-[#F5F5F5] flex items-center justify-center text-[#AAAAAA] hover:text-[#111111] transition-all duration-150"
                 >
-                  <X className="w-4 h-4" strokeWidth={2} />
+                  <X size={14} strokeWidth={2} />
                 </button>
               </div>
 
-              <div className="flex flex-col gap-4">
+              {/* Form */}
+              <div className="px-6 py-5 flex flex-col gap-4">
+
+                {/* Title */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-sans text-[13px] font-semibold text-[#111111]">Co chcesz zmienić?</label>
-                  <textarea
-                    rows={4}
-                    placeholder="Opisz zmianę..."
-                    className="font-sans text-[14px] border border-[#E5E7EB] rounded-[12px] px-4 py-3 focus:outline-none focus:border-[#111111] focus:shadow-[0_0_0_3px_rgba(17,17,17,0.06)] transition-all duration-200 placeholder:text-[#BBBBBB] resize-none"
+                  <label className="font-sans text-[12px] font-semibold text-[#555555]">
+                    Co chcesz zmienić?
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Krótki tytuł zmiany..."
+                    className="font-sans text-[14px] border border-[#EBEBEB] rounded-lg px-3.5 py-2.5 focus:outline-none focus:border-[#AAAAAA] transition-colors placeholder:text-[#CCCCCC]"
                   />
                 </div>
 
+                {/* Description */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-sans text-[13px] font-semibold text-[#111111]">Gdzie na stronie?</label>
-                  <select className="font-sans text-[14px] border border-[#E5E7EB] rounded-[12px] px-4 py-3 focus:outline-none focus:border-[#111111] transition-all duration-200 bg-white text-[#111111] appearance-none cursor-pointer">
+                  <label className="font-sans text-[12px] font-semibold text-[#555555]">
+                    Opisz szczegółowo
+                  </label>
+                  <textarea
+                    rows={3}
+                    placeholder="Co dokładnie i gdzie powinno się zmienić..."
+                    className="font-sans text-[14px] border border-[#EBEBEB] rounded-lg px-3.5 py-2.5 focus:outline-none focus:border-[#AAAAAA] transition-colors placeholder:text-[#CCCCCC] resize-none"
+                  />
+                </div>
+
+                {/* Page */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="font-sans text-[12px] font-semibold text-[#555555]">
+                    Podstrona
+                  </label>
+                  <select className="font-sans text-[14px] border border-[#EBEBEB] rounded-lg px-3.5 py-2.5 focus:outline-none focus:border-[#AAAAAA] transition-colors bg-white text-[#111111] cursor-pointer">
                     <option>Strona główna</option>
                     <option>/uslugi</option>
                     <option>/o-nas</option>
@@ -179,19 +230,39 @@ export default function ZgloszeniaPage() {
                   </select>
                 </div>
 
+                {/* Priority */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="font-sans text-[13px] font-semibold text-[#111111]">Priorytet</label>
+                  <label className="font-sans text-[12px] font-semibold text-[#555555]">
+                    Priorytet
+                  </label>
                   <div className="flex gap-2">
-                    <button className="flex-1 font-sans text-[13px] font-medium border border-[#111111] bg-[#111111] text-white rounded-full py-2.5 transition-all duration-200">
+                    <button
+                      onClick={() => setPriority("normal")}
+                      className={`flex-1 font-sans text-[13px] font-medium py-2 rounded-lg border transition-all duration-150 ${
+                        priority === "normal"
+                          ? "bg-[#111111] text-white border-[#111111]"
+                          : "text-[#666666] border-[#EBEBEB] hover:border-[#CCCCCC]"
+                      }`}
+                    >
                       Normalny
                     </button>
-                    <button className="flex-1 font-sans text-[13px] font-medium border border-[#E5E7EB] text-[#6B7280] hover:border-rose-300 hover:text-rose-600 rounded-full py-2.5 transition-all duration-200">
+                    <button
+                      onClick={() => setPriority("urgent")}
+                      className={`flex-1 font-sans text-[13px] font-medium py-2 rounded-lg border transition-all duration-150 ${
+                        priority === "urgent"
+                          ? "bg-[#111111] text-white border-[#111111]"
+                          : "text-[#666666] border-[#EBEBEB] hover:border-[#CCCCCC]"
+                      }`}
+                    >
                       Pilne
                     </button>
                   </div>
                 </div>
+              </div>
 
-                <button className="w-full mt-2 bg-[#111111] hover:bg-[#000000] text-white font-sans text-[14px] font-medium py-3.5 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.2)] hover:-translate-y-0.5 transition-all duration-200">
+              {/* Submit */}
+              <div className="px-6 pb-5">
+                <button className="w-full bg-[#111111] hover:bg-[#2a2a2a] text-white font-sans text-[14px] font-medium py-2.5 rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.15)] transition-all duration-150">
                   Wyślij zgłoszenie
                 </button>
               </div>
