@@ -68,7 +68,7 @@ function StatCard({ label, sub, data, numEnd, numSuffix = "", isText, textValue 
   return (
     <div
       ref={ref}
-      className="rounded-xl border border-[#E5E5E5] bg-white p-5 flex flex-col hover:border-[#C8C8C8] hover:shadow-[0_4px_16px_rgba(0,0,0,0.05)] transition-all duration-200"
+      className="rounded-xl border border-[#EBEBEB] bg-white p-5 flex flex-col shadow-[0_1px_4px_rgba(0,0,0,0.04)] hover:border-[#CCCCCC] hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-200"
     >
       <div>
         <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-[#BBBBBB] mb-2.5">
@@ -103,7 +103,7 @@ function StatCard({ label, sub, data, numEnd, numSuffix = "", isText, textValue 
               }}
               itemStyle={{ color: "#ffffff", fontSize: "11px" }}
               labelFormatter={() => ""}
-              formatter={(val: number) => [val, ""]}
+              formatter={(val) => [val ?? 0, ""]}
             />
           </LineChart>
         </ResponsiveContainer>
