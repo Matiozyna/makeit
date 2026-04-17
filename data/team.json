@@ -1,0 +1,62 @@
+[
+  {
+    "id": "team-001",
+    "name": "Mateusz Bryła",
+    "role": "Design & Web Development",
+    "bio": "Tworzy nowoczesne, szybkie strony internetowe i aplikacje. Łączy estetykę z funkcjonalnością, żeby każdy projekt konwertował.",
+    "tags": [
+      "Next.js",
+      "Tailwind",
+      "Figma",
+      "UI/UX"
+    ],
+    "color": "bg-violet-500",
+    "photo": "/team/mateusz-bryla.jpg",
+    "order": 0
+  },
+  {
+    "id": "team-002",
+    "name": "Mateusz Kuchciak",
+    "role": "Sprzedaż & IT Strategy",
+    "bio": "Odpowiada za strategię sprzedaży, automatyzacje i treści. Buduje lejki sprzedażowe, które zamieniają ruch w klientów.",
+    "tags": [
+      "CRM",
+      "Automatyzacje",
+      "Copywriting",
+      "Strategia"
+    ],
+    "color": "bg-blue-500",
+    "photo": "/team/mateusz-kuchciak.jpg",
+    "order": 1
+  },
+  {
+    "id": "team-003",
+    "name": "Roksana Tybura",
+    "role": "Fotografia & Obróbka",
+    "bio": "Profesjonalistka od fotografii wizerunkowej, produktowej i content marketingu. Każde zdjęcie opowiada historię marki.",
+    "tags": [
+      "Fotografia",
+      "Lightroom",
+      "Content",
+      "Sesje"
+    ],
+    "color": "bg-pink-500",
+    "photo": "/team/roksana-tybura.png",
+    "order": 2
+  },
+  {
+    "id": "team-004",
+    "name": "Szymon Żaczek",
+    "role": "Montaż & Post-produkcja",
+    "bio": "Filmowiec i montażysta z pasją do motion graphics. Tworzy filmy firmowe, Reelsy i reklamy, które zatrzymują scroll.",
+    "tags": [
+      "Premiere Pro",
+      "After Effects",
+      "Reels",
+      "Motion"
+    ],
+    "color": "bg-amber-500",
+    "photo": "/team/szymon-zaczek.jpg",
+    "order": 3
+  }
+]

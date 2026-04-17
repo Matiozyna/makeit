@@ -6,11 +6,15 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { createAvatar } from "@dicebear/core";
 import { notionists } from "@dicebear/collection";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
 
   const avatarUri = useMemo(() => {
     return createAvatar(notionists, {
@@ -22,9 +26,16 @@ export default function LoginPage() {
     }).toDataUri();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: auth logic
+    setError("");
+    setIsLoading(true);
+    try {
+      const result = await login(email, password);
+      if (result.error) setError(result.error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -33,7 +44,7 @@ export default function LoginPage() {
       <div className="hidden lg:flex lg:w-[55%] bg-[#050505] relative overflow-hidden flex-col justify-between p-12 xl:p-16">
         {/* Background Image */}
         <Image 
-          src="/loginpage/loginpageBG.jpg"
+          src="/loginpage/loginpageBG.webp"
           alt="Make it design presentation"
           fill
           className="object-cover object-center pointer-events-none"
@@ -248,31 +259,52 @@ export default function LoginPage() {
               </div>
             </div>
 
+            {error && (
+              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 font-sans text-[13px] text-center">
+                {error}
+              </div>
+            )}
+
             <button
               type="submit"
-              className="group relative mt-2 w-full h-[52px] flex items-center justify-center rounded-xl bg-[#111111] overflow-hidden transition-all hover:shadow-[0_8px_24px_rgba(17,17,17,0.15)] active:scale-[0.98]"
+              disabled={isLoading}
+              className="group relative mt-2 w-full h-[52px] flex items-center justify-center rounded-xl bg-[#111111] overflow-hidden transition-all hover:shadow-[0_8px_24px_rgba(17,17,17,0.15)] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-[#4EA8FF] to-[#9B66FF] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative font-sans text-[15px] font-semibold text-white tracking-wide">
-                Zaloguj się
+                {isLoading ? "Logowanie..." : "Zaloguj się"}
               </span>
-              <svg className="relative ml-2 w-4 h-4 text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
+              {!isLoading && (
+                <svg className="relative ml-2 w-4 h-4 text-white opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              )}
             </button>
           </motion.form>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-10 text-center font-sans text-[13px] text-[#888888]"
+            className="mt-8 text-center font-sans text-[14px] text-[#888888]"
+          >
+            Nie masz jeszcze konta?{" "}
+            <Link href="/register" className="font-semibold text-[#111111] hover:text-[#4EA8FF] transition-colors">
+              Zarejestruj się
+            </Link>
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
+            className="mt-4 text-center font-sans text-[12px] text-[#AAAAAA]"
           >
             Kontynuując, akceptujesz{" "}
-            <a href="#" className="font-medium text-[#111111] hover:text-[#4EA8FF] transition-colors">Regulamin</a>
+            <a href="#" className="font-medium text-[#888888] hover:text-[#4EA8FF] transition-colors">Regulamin</a>
             {" "}oraz{" "}
-            <a href="#" className="font-medium text-[#111111] hover:text-[#4EA8FF] transition-colors">Politykę prywatności</a>.
+            <a href="#" className="font-medium text-[#888888] hover:text-[#4EA8FF] transition-colors">Politykę prywatności</a>.
           </motion.p>
         </div>
       </div>

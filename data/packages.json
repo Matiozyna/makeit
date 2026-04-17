@@ -1,0 +1,63 @@
+[
+  {
+    "name": "STANDARD",
+    "subtitle": "Dobry start",
+    "slug": "standard",
+    "price": 3000,
+    "priceLabel": "zł/mies.",
+    "highlighted": false,
+    "buttonStyle": "outline",
+    "subtitleStyle": "gray",
+    "features": [
+      "Strona internetowa (one-page lub 3 podstrony)",
+      "4 rolki miesięcznie (Reels/TikTok)",
+      "Prowadzenie: Instagram + Facebook",
+      "Sesja produktowa — 5 zdjęć",
+      "Stworzenie grafik dla firmy (logo pack + 10 postów)",
+      "Raport miesięczny z wynikami"
+    ]
+  },
+  {
+    "name": "PREMIUM",
+    "subtitle": "Pełna moc",
+    "slug": "premium",
+    "price": 6000,
+    "priceLabel": "zł/mies.",
+    "highlighted": true,
+    "buttonStyle": "gradient",
+    "subtitleStyle": "gold",
+    "features": [
+      "Rozbudowana strona internetowa (do 7 podstron + SEO + Google Analytics)",
+      "8 rolek miesięcznie (Reels/TikTok/Shorts)",
+      "Prowadzenie: Instagram + Facebook + TikTok + YouTube",
+      "Sesja produktowa — 15 zdjęć + obróbka",
+      "Stworzenie pełnej identyfikacji wizualnej (logo, kolory, fonty, brand book)",
+      "Kampanie reklamowe Meta Ads (konfiguracja + obsługa)",
+      "Content plan na miesiąc do przodu",
+      "Raport miesięczny + spotkanie online z omówieniem wyników",
+      "Konsultacja sprzedażowa — analiza produktów i audyt sprzedażowy"
+    ]
+  },
+  {
+    "name": "MAKE IT WORK",
+    "subtitle": "Robimy wszystko",
+    "slug": "make-it-work",
+    "price": 12000,
+    "priceLabel": "zł/mies.",
+    "highlighted": false,
+    "buttonStyle": "solid",
+    "subtitleStyle": "gradient",
+    "features": [
+      "Strona internetowa premium (custom design, animacje, blog, sklep/landing pages)",
+      "12 rolek + 4 długie formy wideo (np. YouTube, podcast clips)",
+      "Prowadzenie: Instagram + Facebook + TikTok + YouTube + LinkedIn",
+      "Sesja foto + wideo na lokacji — pełny dzień zdjęciowy",
+      "Pełna identyfikacja wizualna + materiały drukowane (wizytówki, ulotki, roll-upy)",
+      "Kampanie reklamowe Meta Ads + Google Ads (konfiguracja + optymalizacja + budżet)",
+      "Strategia marketingowa na kwartał (content plan, lejek sprzedażowy, analiza konkurencji)",
+      "Dedykowany opiekun klienta — kontakt 6 dni w tygodniu",
+      "Raport tygodniowy + spotkanie miesięczne z roadmapą",
+      "Konsultacja sprzedażowa — analiza produktów i audyt sprzedażowy"
+    ]
+  }
+]

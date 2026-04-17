@@ -1,0 +1,62 @@
+[
+  {
+    "id": "tst-001",
+    "name": "Anna Kowalska",
+    "role": "Właścicielka kwiaciarni Bloom",
+    "text": "Strona przeszła nasze oczekiwania. Klienci sami mówią, że wyglądamy jak duża marka. Profesjonalizm na każdym etapie współpracy.",
+    "rating": 5,
+    "color": "bg-pink-500",
+    "visible": true,
+    "order": 0
+  },
+  {
+    "id": "tst-002",
+    "name": "Tomasz Wiśniewski",
+    "role": "CEO TechBuild",
+    "text": "Social media prowadzone profesjonalnie. W ciągu 2 miesięcy podwoiliśmy zapytania z Instagrama. Widać, że to zespół, który rozumie marketing.",
+    "rating": 5,
+    "color": "bg-blue-500",
+    "visible": true,
+    "order": 1
+  },
+  {
+    "id": "tst-003",
+    "name": "Magdalena Nowak",
+    "role": "Coach kariery",
+    "text": "Marka osobista postawiona od zera. LinkedIn działa, klienci sami piszą. Nie sądziłam, że to może tak szybko przynieść efekty.",
+    "rating": 5,
+    "color": "bg-emerald-500",
+    "visible": true,
+    "order": 2
+  },
+  {
+    "id": "tst-004",
+    "name": "Piotr Zając",
+    "role": "Restauracja Złoty Karp",
+    "text": "Film reklamowy zrobiony z pomysłem. Wrzuciliśmy na FB i zebrał 80 tys. wyświetleń organicznie. Nowi klienci przychodzą z polecenia z sieci.",
+    "rating": 5,
+    "color": "bg-orange-500",
+    "visible": true,
+    "order": 3
+  },
+  {
+    "id": "tst-005",
+    "name": "Karolina Bąk",
+    "role": "Sklep z biżuterią",
+    "text": "Sklep działa świetnie, sesja produktowa wyglądała jak ze Vogue. Polecam bez wahania. Konwersja wzrosła o 40% po nowych zdjęciach.",
+    "rating": 5,
+    "color": "bg-amber-500",
+    "visible": true,
+    "order": 4
+  },
+  {
+    "id": "tst-006",
+    "name": "Michał Grabowski",
+    "role": "Gabinet stomatologiczny",
+    "text": "Strona wizytówkowa plus zdjęcia personelu zrobiły robotę. Pacjenci pytają skąd tak profesjonalne zdjęcia. Teraz mamy pełny grafik.",
+    "rating": 5,
+    "color": "bg-violet-500",
+    "visible": true,
+    "order": 5
+  }
+]

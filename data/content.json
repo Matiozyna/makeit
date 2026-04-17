@@ -1,0 +1,61 @@
+{
+  "siteName": "Make it",
+  "siteUrl": "https://www.make.it",
+  "tagline": "Projektujemy obecność, która sprzedaje.",
+  "heroSubtitle": "Kompleksowy rozwój obecności online firm i marek osobistych. Strony, social media, foto, wideo i treści sprzedażowe — pod jednym dachem.",
+  "hero": {
+    "badge": "Agencja kreatywna z Warszawy",
+    "headlineTop": "Twój biznes jest dobry,",
+    "headlineBottom": "ale internet o tym",
+    "headlineAccent": "nie wie.",
+    "ctaPrimary": "Dlaczego Make it?",
+    "ctaSecondary": "Zacznij projekt",
+    "rotatingPrefix": "Zaufany partner designu i developmentu dla",
+    "rotatingTargets": ["firm", "e-commerce", "twórców", "restauracji", "startupów"],
+    "rotatingSuffix": "Przeprowadzamy marki od złożoności do prostoty.",
+    "clients": ["Trinity Power", "Bloom Kwiaty", "Golden Jewel", "Złoty Karp", "TechBuild", "Patrycja G.", "Zielony Warsztat"]
+  },
+  "footer": {
+    "description": "Projektujemy obecność, która sprzedaje. Strony, social media, zdjęcia i wideo — wszystko w jednym miejscu.",
+    "copyright": "Make it. Wszelkie prawa zastrzeżone."
+  },
+  "contactCta": {
+    "heading": "Dostań bezpłatną konsultację projektu",
+    "description": "Napisz do nas lub zarezerwuj szybką rozmowę. Niezależnie czy masz gotowy projekt, czy dopiero pomysł — jesteśmy tu, żeby pomóc.",
+    "emailButtonLabel": "Zarezerwuj rozmowę"
+  },
+  "contact": {
+    "email": "kontakt@make.it",
+    "phone": "+48 123 456 789",
+    "address": "Kraków, Polska"
+  },
+  "social": {
+    "instagram": "",
+    "facebook": "",
+    "linkedin": "",
+    "tiktok": ""
+  },
+  "stats": [
+    {
+      "value": 24,
+      "label": "Zrealizowane projekty",
+      "suffix": ""
+    },
+    {
+      "value": 4,
+      "label": "Specjalistów w zespole",
+      "suffix": ""
+    },
+    {
+      "value": 100,
+      "label": "Zadowolonych klientów",
+      "suffix": "%"
+    }
+  ],
+  "seo": {
+    "title": "Make it — Projektujemy obecność, która sprzedaje",
+    "description": "Kompleksowy rozwój obecności online firm i marek osobistych. Strony internetowe, social media, fotografia, wideo i treści sprzedażowe — pod jednym dachem.",
+    "ogImage": ""
+  },
+  "googleAnalyticsId": ""
+}

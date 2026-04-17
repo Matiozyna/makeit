@@ -1,0 +1,165 @@
+[
+  {
+    "id": "svc-001",
+    "icon": "Globe",
+    "title": "Strony internetowe",
+    "specialist": "Mateusz Bryła",
+    "description": "Od wizytówki po rozbudowany sklep — tworzymy szybkie, nowoczesne strony, które konwertują odwiedzających w klientów.",
+    "items": [
+      {
+        "name": "Wizytówkowa",
+        "min": 700,
+        "max": 1400
+      },
+      {
+        "name": "Landing page",
+        "min": 500,
+        "max": 1000
+      },
+      {
+        "name": "Strona firmowa",
+        "min": 1500,
+        "max": 4000
+      },
+      {
+        "name": "Sklep internetowy",
+        "min": 2500,
+        "max": 7000
+      }
+    ],
+    "color": "from-violet-500/20 to-purple-500/20",
+    "order": 0
+  },
+  {
+    "id": "svc-002",
+    "icon": "Share2",
+    "title": "Social Media",
+    "specialist": "Mateusz Kuchciak + Roksana",
+    "description": "Strategia, kreacja i prowadzenie profili. Budujemy społeczność i generujemy leady z social mediów.",
+    "items": [
+      {
+        "name": "Pakiet Starter",
+        "min": 800,
+        "max": 800
+      },
+      {
+        "name": "Pakiet Pro",
+        "min": 1500,
+        "max": 1500
+      },
+      {
+        "name": "Pakiet Full",
+        "min": 2500,
+        "max": 2500
+      }
+    ],
+    "priceLabel": "/mc",
+    "color": "from-blue-500/20 to-cyan-500/20",
+    "order": 1
+  },
+  {
+    "id": "svc-003",
+    "icon": "Camera",
+    "title": "Fotografia",
+    "specialist": "Roksana Tybura",
+    "description": "Profesjonalne sesje wizerunkowe, produktowe i biznesowe. Zdjęcia, które budują wiarygodność marki.",
+    "items": [
+      {
+        "name": "Sesja wizerunkowa",
+        "min": 500,
+        "max": 1200
+      },
+      {
+        "name": "Sesja produktowa",
+        "min": 400,
+        "max": 900
+      },
+      {
+        "name": "Sesja biznesowa",
+        "min": 700,
+        "max": 1500
+      }
+    ],
+    "color": "from-pink-500/20 to-rose-500/20",
+    "order": 2
+  },
+  {
+    "id": "svc-004",
+    "icon": "Film",
+    "title": "Wideo & Montaż",
+    "specialist": "Szymon Żaczek + Roksana",
+    "description": "Filmy firmowe, Reelsy i reklamy wideo. Od scenariusza przez nagranie po montaż i post-produkcję.",
+    "items": [
+      {
+        "name": "Film firmowy",
+        "min": 1500,
+        "max": 4000
+      },
+      {
+        "name": "Reels x4",
+        "min": 600,
+        "max": 1200
+      },
+      {
+        "name": "Film reklamowy",
+        "min": 2000,
+        "max": 6000
+      }
+    ],
+    "color": "from-orange-500/20 to-amber-500/20",
+    "order": 3
+  },
+  {
+    "id": "svc-005",
+    "icon": "UserCircle",
+    "title": "Marka Osobista",
+    "specialist": "Cały zespół",
+    "description": "Kompleksowa budowa marki osobistej — strategia, obecność online i konsekwentna komunikacja.",
+    "items": [
+      {
+        "name": "Strategia",
+        "min": 800,
+        "max": 2000
+      },
+      {
+        "name": "LinkedIn setup",
+        "min": 500,
+        "max": 1000
+      },
+      {
+        "name": "Prowadzenie",
+        "min": 1200,
+        "max": 2500
+      }
+    ],
+    "priceLabel": "/mc",
+    "color": "from-emerald-500/20 to-teal-500/20",
+    "order": 4
+  },
+  {
+    "id": "svc-006",
+    "icon": "PenTool",
+    "title": "Treści Sprzedażowe",
+    "specialist": "Mateusz Kuchciak",
+    "description": "Copywriting, który sprzedaje. Teksty na strony, social media i oferty handlowe.",
+    "items": [
+      {
+        "name": "Copywriting strony",
+        "min": 500,
+        "max": 1500
+      },
+      {
+        "name": "Posty social x10",
+        "min": 400,
+        "max": 800
+      },
+      {
+        "name": "Oferta handlowa",
+        "min": 500,
+        "max": 1200
+      }
+    ],
+    "color": "from-yellow-500/20 to-orange-500/20",
+    "order": 5
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "msg-001",
+    "name": "Magdalena Nowak",
+    "email": "magda@coach.pl",
+    "phone": "+48 800 400 500",
+    "service": "Marka Osobista",
+    "budget": "1 000 – 3 000 zł",
+    "message": "Chciałabym postawić markę osobistą od podstaw. Potrzebuję strategii, LinkedIn i regularnego prowadzenia. Czy moglibyśmy porozmawiać?",
+    "read": true,
+    "archived": false,
+    "createdAt": "2025-03-01T08:00:00.000Z"
+  },
+  {
+    "id": "msg-002",
+    "name": "Karolina Bąk",
+    "email": "karo@goldenjewel.pl",
+    "phone": "",
+    "service": "Fotografia",
+    "budget": "do 1 000 zł",
+    "message": "Potrzebuję sesji produktowej biżuterii — około 30 produktów. Czy macie doświadczenie z tego typu sesjami? Proszę o wycenę.",
+    "read": false,
+    "archived": false,
+    "createdAt": "2025-03-15T14:30:00.000Z"
+  }
+]
