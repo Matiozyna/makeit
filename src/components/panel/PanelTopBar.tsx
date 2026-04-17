@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Bell, Search } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const pageNames: Record<string, string> = {
   "/panel": "Dashboard",
@@ -14,11 +15,15 @@ const pageNames: Record<string, string> = {
   "/panel/raporty": "Raporty SEO",
   "/panel/zgloszenia": "Zgloszenia zmian",
   "/panel/platnosci": "Płatności",
+  "/panel/zamowienia": "Moje zamówienia",
+  "/panel/konto": "Edycja konta",
 };
 
 export default function PanelTopBar() {
   const pathname = usePathname();
   const pageName = pageNames[pathname] || "Panel";
+  const { user } = useAuth();
+  const initials = user?.name?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase() || "??";
 
   return (
     <header className="h-[56px] px-8 flex items-center justify-between shrink-0 border-b border-[#EBEBEB] bg-[#F7F7F8]">
@@ -48,12 +53,12 @@ export default function PanelTopBar() {
 
         <div className="w-px h-4 bg-[#EBEBEB] mx-1" />
 
-        <button className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-black/[0.04] transition-all duration-150">
+        <Link href="/panel/konto" className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg hover:bg-black/[0.04] transition-all duration-150">
           <div className="w-6 h-6 rounded-full bg-[#111111] flex items-center justify-center">
-            <span className="font-sans text-[8px] font-bold text-white">KB</span>
+            <span className="font-sans text-[8px] font-bold text-white">{initials}</span>
           </div>
-          <span className="font-sans text-[13px] font-medium text-[#333333]">Kuchciak</span>
-        </button>
+          <span className="font-sans text-[13px] font-medium text-[#333333]">{user?.name?.split(" ")[0] || "..."}</span>
+        </Link>
       </div>
     </header>
   );

@@ -15,7 +15,12 @@ import {
   FileEdit,
   ChevronLeft,
   ChevronRight,
+  ShoppingCart,
+  UserCog,
+  LogOut,
+  Settings,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navGroups = [
   {
@@ -42,6 +47,13 @@ const navGroups = [
       { icon: FileEdit, label: "Zgloszenia", href: "/panel/zgloszenia" },
     ],
   },
+  {
+    label: "Konto",
+    items: [
+      { icon: ShoppingCart, label: "Moje zamówienia", href: "/panel/zamowienia" },
+      { icon: UserCog, label: "Edycja konta", href: "/panel/konto" },
+    ],
+  },
 ];
 
 const PROGRESS = 65;
@@ -53,6 +65,7 @@ interface PanelSidebarProps {
 
 export default function PanelSidebar({ collapsed, onToggle }: PanelSidebarProps) {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
 
   return (
     <aside
@@ -66,7 +79,7 @@ export default function PanelSidebar({ collapsed, onToggle }: PanelSidebarProps)
           collapsed ? "justify-center px-0" : "justify-between px-5"
         }`}
       >
-        <Link href="/panel" className="flex items-center gap-2.5 min-w-0">
+        <Link href="/" className="flex items-center gap-2.5 min-w-0">
           <div className="w-[26px] h-[26px] rounded-[6px] bg-white flex items-center justify-center shrink-0">
             <span className="font-display font-black text-[11px] text-[#111111] leading-none">m</span>
           </div>
@@ -209,17 +222,36 @@ export default function PanelSidebar({ collapsed, onToggle }: PanelSidebarProps)
           )}
         </div>
 
-        {/* Client + toggle */}
+        {/* Logout */}
+        <button
+          onClick={logout}
+          className={`flex items-center transition-colors duration-150 text-white/35 hover:text-red-400 hover:bg-white/5 rounded-lg mb-3 ${
+            collapsed ? "w-10 h-10 mx-auto justify-center" : "gap-2.5 px-3 py-2 w-full"
+          }`}
+          title="Wyloguj"
+        >
+          <LogOut size={16} strokeWidth={1.75} className="shrink-0" />
+          {!collapsed && <span className="font-sans text-[13px] font-medium">Wyloguj</span>}
+        </button>
+
+        {/* User + toggle */}
         <div className={`flex items-center ${collapsed ? "justify-center flex-col gap-2" : "justify-between"}`}>
           <div className={`flex items-center ${collapsed ? "justify-center" : "gap-2 min-w-0"}`}>
             <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
-              <span className="font-sans text-[9px] font-bold text-white/60">KB</span>
+              <span className="font-sans text-[9px] font-bold text-white/60">
+                {user?.name?.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase() || "??"}
+              </span>
             </div>
             {!collapsed && (
               <div className="min-w-0">
                 <p className="font-sans text-[11px] font-medium text-white/55 truncate">
-                  Kuchciak Bud.
+                  {user?.name || "Ładowanie..."}
                 </p>
+                {user?.role === "admin" && (
+                  <Link href="/admin" className="font-sans text-[9px] text-[#4EA8FF]/80 hover:text-[#4EA8FF] transition-colors">
+                    Panel admina &rarr;
+                  </Link>
+                )}
               </div>
             )}
           </div>

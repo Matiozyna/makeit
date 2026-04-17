@@ -28,7 +28,7 @@ export default function WelcomeOverlay({ onContinue }: WelcomeOverlayProps) {
           transition={{ duration: 1.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="absolute -left-[10%] top-[10%] w-[55%]"
         >
-          <Image src="/design/parallax/cloud-left.png" alt="" width={800} height={500} className="w-full h-auto" priority />
+          <Image src="/shared/parallax/cloud-left.webp" alt="" width={800} height={500} className="w-full h-auto" priority />
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 60 }}
@@ -36,7 +36,7 @@ export default function WelcomeOverlay({ onContinue }: WelcomeOverlayProps) {
           transition={{ duration: 1.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="absolute -right-[10%] top-[5%] w-[55%]"
         >
-          <Image src="/design/parallax/cloud-right.png" alt="" width={800} height={500} className="w-full h-auto" priority />
+          <Image src="/shared/parallax/cloud-right.webp" alt="" width={800} height={500} className="w-full h-auto" priority />
         </motion.div>
       </div>
 
