@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
+import { useVisibility } from "@/hooks/useVisibility";
 
-const targets = [
+const defaultTargets = [
   "firm",
   "e-commerce",
   "twórców",
@@ -11,24 +12,33 @@ const targets = [
   "startupów",
 ];
 
-export default function RotatingSubline() {
+interface RotatingSublineProps {
+  prefix?: string;
+  targets?: string[];
+  suffix?: string;
+}
+
+export default function RotatingSubline({ prefix, targets: targetsProp, suffix }: RotatingSublineProps) {
+  const targets = targetsProp?.length ? targetsProp : defaultTargets;
   const [index, setIndex] = useState(0);
+  const { ref, isVisible } = useVisibility();
 
   useEffect(() => {
+    if (!isVisible) return;
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % targets.length);
     }, 3200);
     return () => clearInterval(id);
-  }, []);
+  }, [isVisible]);
 
   return (
     <LayoutGroup>
-      <div className="font-sans text-[16px] md:text-[18px] text-[#666666] leading-relaxed flex flex-col items-center">
+      <div ref={ref} className="font-sans text-[16px] md:text-[18px] text-[#666666] leading-relaxed flex flex-col items-center">
         
         {/* Top Line with dynamic pill and dot */}
         <motion.div layout className="flex flex-wrap items-center justify-center">
           <motion.span layout className="whitespace-pre">
-            Zaufany partner designu i developmentu dla{" "}
+            {prefix ?? "Zaufany partner designu i developmentu dla"}{" "}
           </motion.span>
           
           <motion.span 
@@ -63,7 +73,7 @@ export default function RotatingSubline() {
 
         {/* Bottom Line */}
         <motion.div layout className="mt-1 text-center">
-          Przeprowadzamy marki od złożoności do prostoty.
+          {suffix ?? "Przeprowadzamy marki od złożoności do prostoty."}
         </motion.div>
 
       </div>

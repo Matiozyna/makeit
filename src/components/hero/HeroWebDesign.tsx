@@ -112,7 +112,7 @@ export default function HeroWebDesign() {
           className="absolute bottom-[-6%] left-[-12%]"
         >
           <Image
-            src="/design/parallax/cloud-left.png"
+            src="/shared/parallax/cloud-left.webp"
             alt=""
             width={580}
             height={640}
@@ -128,7 +128,7 @@ export default function HeroWebDesign() {
           className="absolute bottom-[-6%] right-[-12%]"
         >
           <Image
-            src="/design/parallax/cloud-right.png"
+            src="/shared/parallax/cloud-right.webp"
             alt=""
             width={580}
             height={640}

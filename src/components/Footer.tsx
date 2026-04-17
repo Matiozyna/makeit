@@ -1,34 +1,50 @@
-const footerLinks = {
-  Strony: [
-    { label: "O nas", href: "#o-nas" },
-    { label: "Usługi", href: "#uslugi" },
-    { label: "Projekty", href: "#projekty" },
-    { label: "Blog", href: "#" },
-  ],
-  Usługi: [
-    { label: "Web Design", href: "#uslugi" },
-    { label: "Social Media", href: "#uslugi" },
-    { label: "Fotografia", href: "#uslugi" },
-    { label: "Wideo", href: "#uslugi" },
-    { label: "Marka osobista", href: "#uslugi" },
-  ],
-  Kontakt: [
-    { label: "kontakt@make.it", href: "mailto:kontakt@make.it" },
-    { label: "+48 123 456 789", href: "tel:+48123456789" },
-    { label: "Kraków, Polska", href: "#" },
-  ],
-};
+import type { SiteContent } from "@/lib/content-types";
 
-const socials = [
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "TikTok", href: "#" },
-];
+interface FooterProps {
+  content?: SiteContent;
+}
 
 const marqueeWord = "MAKEIT";
 const marqueeRepeat = Array.from({ length: 12 }, () => marqueeWord);
 
-export default function Footer() {
+export default function Footer({ content }: FooterProps) {
+  const contactEmail = content?.contact?.email || "kontakt@make.it";
+  const contactPhone = content?.contact?.phone || "+48 123 456 789";
+  const contactAddress = content?.contact?.address || "Kraków, Polska";
+
+  const footerLinks = {
+    Strony: [
+      { label: "O nas", href: "#o-nas" },
+      { label: "Usługi", href: "#uslugi" },
+      { label: "Projekty", href: "#projekty" },
+      { label: "Blog", href: "#" },
+    ],
+    Usługi: [
+      { label: "Web Design", href: "#uslugi" },
+      { label: "Social Media", href: "#uslugi" },
+      { label: "Fotografia", href: "#uslugi" },
+      { label: "Wideo", href: "#uslugi" },
+      { label: "Marka osobista", href: "#uslugi" },
+    ],
+    Kontakt: [
+      { label: contactEmail, href: `mailto:${contactEmail}` },
+      { label: contactPhone, href: `tel:${contactPhone.replace(/\s/g, "")}` },
+      { label: contactAddress, href: "#" },
+    ],
+  };
+
+  const socialLinks = [
+    content?.social?.instagram ? { label: "Instagram", href: content.social.instagram } : null,
+    content?.social?.linkedin ? { label: "LinkedIn", href: content.social.linkedin } : null,
+    content?.social?.tiktok ? { label: "TikTok", href: content.social.tiktok } : null,
+    content?.social?.facebook ? { label: "Facebook", href: content.social.facebook } : null,
+  ].filter(Boolean) as { label: string; href: string }[];
+
+  const socials = socialLinks.length > 0 ? socialLinks : [
+    { label: "Instagram", href: "#" },
+    { label: "LinkedIn", href: "#" },
+    { label: "TikTok", href: "#" },
+  ];
   return (
     <footer className="bg-[#F9F9F9] border-t border-[#EAEAEA] overflow-hidden relative">
       {/* Main footer */}
@@ -39,11 +55,11 @@ export default function Footer() {
             <a href="/" className="inline-flex items-center gap-2 group mb-5">
               <div className="w-5 h-5 border-2 border-[#111111] rounded-full group-hover:scale-105 transition-transform duration-200" />
               <span className="font-sans font-bold text-[#111111] text-[17px] tracking-tight">
-                make it.
+                {(content?.siteName || "make it").toLowerCase()}.
               </span>
             </a>
             <p className="font-sans text-sm text-[#666666] leading-relaxed mb-8 max-w-xs">
-              Projektujemy obecność, która sprzedaje. Strony, social media, zdjęcia i wideo — wszystko w jednym miejscu.
+              {content?.footer?.description || "Projektujemy obecność, która sprzedaje. Strony, social media, zdjęcia i wideo — wszystko w jednym miejscu."}
             </p>
             {/* Newsletter */}
             <div className="flex gap-2 max-w-sm">
@@ -85,7 +101,7 @@ export default function Footer() {
       <div className="border-t border-[#EAEAEA] px-6 py-5 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-sans text-xs text-[#AAAAAA]">
-            © {new Date().getFullYear()} Make it. Wszelkie prawa zastrzeżone.
+            © {new Date().getFullYear()} {content?.footer?.copyright || "Make it. Wszelkie prawa zastrzeżone."}
           </p>
           <div className="flex items-center gap-5">
             {socials.map((s) => (

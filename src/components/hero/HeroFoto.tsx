@@ -230,7 +230,7 @@ export default function HeroFoto() {
           className="absolute bottom-[-2%] left-[-8%] pointer-events-none z-[3]"
         >
           <Image
-            src="/foto/parallax/cloud-left.png"
+            src="/shared/parallax/cloud-left.webp"
             alt=""
             width={580}
             height={640}
@@ -249,7 +249,7 @@ export default function HeroFoto() {
           className="absolute bottom-[-2%] right-[-8%] pointer-events-none z-[3]"
         >
           <Image
-            src="/foto/parallax/cloud-right.png"
+            src="/shared/parallax/cloud-right.webp"
             alt=""
             width={580}
             height={640}
@@ -273,7 +273,7 @@ export default function HeroFoto() {
               transition={{ repeat: Infinity, duration: 4.0, ease: "easeInOut" }}
             >
               <Image
-                src="/foto/photo/camera.png"
+                src="/foto/photo/camera.webp"
                 alt="Aparat fotograficzny"
                 width={2048}
                 height={2048}

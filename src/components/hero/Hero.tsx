@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import GridBackground from "./GridBackground";
 import RotatingSubline from "./RotatingSubline";
+import type { SiteContent } from "@/lib/content-types";
 
 function LaurelBranch({ mirrored = false }: { mirrored?: boolean }) {
   // Quadratic bezier almond leaf — symmetric, clean at any small size.
@@ -60,18 +61,16 @@ const fadeUp = (delay: number) => ({
   },
 });
 
-const clients = [
-  "Trinity Power",
-  "Bloom Kwiaty",
-  "Golden Jewel",
-  "Złoty Karp",
-  "TechBuild",
-  "Patrycja G.",
-  "Zielony Warsztat",
-];
+interface HeroProps {
+  content?: SiteContent;
+}
 
-export default function Hero() {
-  console.log("Hero component rendered! If you see this, HMR is working.");
+export default function Hero({ content }: HeroProps) {
+  const hero = content?.hero;
+  const clients = hero?.clients ?? [
+    "Trinity Power", "Bloom Kwiaty", "Golden Jewel", "Złoty Karp",
+    "TechBuild", "Patrycja G.", "Zielony Warsztat",
+  ];
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-transparent z-0">
       <div className="absolute inset-0 -z-10">
@@ -85,7 +84,7 @@ export default function Hero() {
         <motion.div {...fadeUp(0.2)} className="flex items-center gap-3 mb-8">
           <LaurelBranch />
           <span className="font-sans text-[12px] font-medium text-[#A8A29A] tracking-[0.12em] uppercase">
-            Agencja kreatywna z Warszawy
+            {hero?.badge ?? "Agencja kreatywna z Warszawy"}
           </span>
           <LaurelBranch mirrored />
         </motion.div>
@@ -105,18 +104,18 @@ export default function Hero() {
             {...fadeUp(0.35)}
             className="font-display font-medium text-[48px] sm:text-[56px] md:text-[68px] lg:text-[76px] text-[#111111] tracking-[-0.04em] leading-[1.05] text-center"
           >
-            Twój biznes jest dobry,
+            {hero?.headlineTop ?? "Twój biznes jest dobry,"}
           </motion.span>
           <motion.div {...fadeUp(0.5)} className="relative inline-block mt-[-2px] text-center">
             <span
               className="font-display font-medium text-[48px] sm:text-[56px] md:text-[68px] lg:text-[76px] tracking-[-0.04em] leading-[1.05] text-[#111111]"
             >
-              ale internet o tym{" "}
+              {hero?.headlineBottom ?? "ale internet o tym"}{" "}
             </span>
             <span
               className="font-display font-medium text-[48px] sm:text-[56px] md:text-[68px] lg:text-[76px] tracking-[-0.04em] leading-[1.05] gradient-text relative z-10"
             >
-              nie wie.
+              {hero?.headlineAccent ?? "nie wie."}
               {/* The animated swoosh matching the gradient */}
               <svg 
                 className="absolute -bottom-1 left-0 w-[110%] h-[20px] overflow-visible -translate-x-[5%] z-20" 
@@ -145,7 +144,11 @@ export default function Hero() {
 
         {/* Rotating subline */}
         <motion.div {...fadeUp(0.65)} className="mb-12 mt-6 z-10 max-w-2xl">
-          <RotatingSubline />
+          <RotatingSubline
+            prefix={hero?.rotatingPrefix}
+            targets={hero?.rotatingTargets}
+            suffix={hero?.rotatingSuffix}
+          />
         </motion.div>
 
         {/* CTAs - Refined to match Drewl (smaller, better shadows/borders) */}
@@ -154,14 +157,14 @@ export default function Hero() {
             href="#uslugi"
             className="group relative inline-flex h-[44px] items-center justify-center overflow-hidden rounded-full bg-white px-6 font-sans text-[14px] font-medium text-[#111111] transition-all duration-300 shadow-[0_1px_3px_rgba(0,0,0,0.08)] border border-[#E5E5E5] hover:border-[#D0D0D0] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
           >
-            <span className="relative z-10">Dlaczego Make it?</span>
+            <span className="relative z-10">{hero?.ctaPrimary ?? "Dlaczego Make it?"}</span>
           </a>
           
           <a
-            href="#kontakt"
+            href="/pakiety"
             className="group relative inline-flex h-[44px] items-center justify-center overflow-hidden rounded-full bg-[#111111] px-6 font-sans text-[14px] font-medium text-white transition-all duration-300 shadow-[0_4px_14px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.2)] hover:bg-[#000000]"
           >
-            <span className="relative z-10">Zacznij projekt</span>
+            <span className="relative z-10">{hero?.ctaSecondary ?? "Zacznij projekt"}</span>
             {/* Subtle highlight overlay on hover */}
             <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-150%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(150%)]">
               <div className="relative h-full w-8 bg-white/20" />

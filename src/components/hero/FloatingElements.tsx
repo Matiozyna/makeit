@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 
 const floatProps = (delay: number) => ({
   initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: [0, -8, 0] as number[] },
+  whileInView: { opacity: 1, y: [0, -8, 0] as number[] },
+  viewport: { once: false, margin: "200px" },
   transition: {
     opacity: { duration: 0.5, delay },
     y: { delay, duration: 3.5, repeat: Infinity, ease: "easeInOut" as const },

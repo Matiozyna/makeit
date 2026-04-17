@@ -2,8 +2,17 @@
 
 import { useState } from "react";
 import { People, ClipboardText, Lamp } from "iconsax-react";
+import type { SiteContent } from "@/lib/content-types";
 
-export default function ContactCTA() {
+interface ContactCTAProps {
+  content?: SiteContent;
+}
+
+export default function ContactCTA({ content }: ContactCTAProps) {
+  const contactEmail = content?.contact?.email || "kontakt@makeit.pl";
+  const ctaHeading = content?.contactCta?.heading || "Dostań bezpłatną konsultację projektu";
+  const ctaDescription = content?.contactCta?.description || "Napisz do nas lub zarezerwuj szybką rozmowę. Niezależnie czy masz gotowy projekt, czy dopiero pomysł — jesteśmy tu, żeby pomóc.";
+  const ctaEmailLabel = content?.contactCta?.emailButtonLabel || "Zarezerwuj rozmowę";
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
 
@@ -18,17 +27,15 @@ export default function ContactCTA() {
         {/* Centered heading */}
         <div className="text-center mb-16">
           <h2 className="font-display font-medium text-[40px] sm:text-[52px] md:text-[60px] text-[#111111] leading-[1.1] tracking-[-0.04em] mb-5">
-            Dostań bezpłatną{" "}
+            {ctaHeading}{" "}
             <span className="inline-flex items-center justify-center w-[52px] h-[52px] rounded-[16px] bg-gradient-to-b from-[#333333] to-[#111111] shadow-[0_4px_16px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.1)] align-middle mx-1 relative -top-1">
               <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
             </span>
-            <br className="hidden sm:block" />
-            konsultację projektu
           </h2>
           <p className="font-sans text-[16px] sm:text-[18px] text-[#666666] leading-relaxed max-w-xl mx-auto">
-            Napisz do nas lub zarezerwuj szybką rozmowę. Niezależnie czy masz gotowy projekt, czy dopiero pomysł — jesteśmy tu, żeby pomóc.
+            {ctaDescription}
           </p>
         </div>
 
@@ -72,7 +79,7 @@ export default function ContactCTA() {
               {/* Gradient bleed */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#4EA8FF]/10 via-[#9B66FF]/5 to-transparent pointer-events-none" />
               <a
-                href="mailto:kontakt@makeit.pl"
+                href={`mailto:${contactEmail}`}
                 className="relative z-10 w-full inline-flex h-[52px] items-center justify-center gap-2 rounded-full bg-[#0A0A0A] font-sans text-[15px] font-semibold text-white hover:bg-[#1a1a1a] transition-colors duration-200"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -81,7 +88,7 @@ export default function ContactCTA() {
                   <line x1="8" y1="2" x2="8" y2="6" />
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
-                Zarezerwuj rozmowę
+                {ctaEmailLabel}
               </a>
             </div>
           </div>
