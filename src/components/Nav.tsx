@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
+import { useAuth } from "@/contexts/AuthContext";
 
 import codeImg from "../../public/services/code_first.webp";
 import rocketImg from "../../public/services/rocket_second.webp";
@@ -45,6 +46,7 @@ const expertiseItems = [
 ];
 
 export default function Nav() {
+  const { user, loading: authLoading, logout } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -160,23 +162,46 @@ export default function Nav() {
 
         {/* CTAs */}
         <div className="flex items-center gap-3">
-          <a
-            href="/login"
-            className="hidden sm:inline-flex font-sans text-[14px] font-medium text-[#111111] hover:text-[#111111] transition-all duration-200 px-5 py-2.5 rounded-full border border-[#EAEAEA] hover:border-[#CCCCCC] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
-          >
-            Panel klienta
-          </a>
+          {authLoading ? (
+            <div className="hidden sm:flex items-center gap-3">
+              <div className="w-[110px] h-[40px] rounded-full bg-[#F0F0F0] animate-pulse" />
+            </div>
+          ) : user ? (
+            <>
+              <button
+                onClick={logout}
+                className="hidden sm:inline-flex font-sans text-[14px] font-medium text-[#111111] hover:text-[#111111] transition-all duration-200 px-5 py-2.5 rounded-full border border-[#EAEAEA] hover:border-[#CCCCCC] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
+              >
+                Wyloguj
+              </button>
+              <a
+                href={user.role === "admin" ? "/admin" : "/panel"}
+                className="hidden sm:inline-flex font-sans text-[14px] font-medium text-[#111111] hover:text-[#111111] transition-all duration-200 px-5 py-2.5 rounded-full border border-[#EAEAEA] hover:border-[#CCCCCC] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
+              >
+                {user.role === "admin" ? "Panel admina" : "Panel klienta"}
+              </a>
+            </>
+          ) : (
+            <>
+              <a
+                href="/login"
+                className="hidden sm:inline-flex font-sans text-[14px] font-medium text-[#111111] hover:text-[#111111] transition-all duration-200 px-5 py-2.5 rounded-full border border-[#EAEAEA] hover:border-[#CCCCCC] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
+              >
+                Zaloguj
+              </a>
 
-          {/* Electric Border Button */}
-          <a
-            href="#kontakt"
-            className="relative inline-flex h-10 overflow-hidden rounded-full p-[2px] group focus:outline-none focus:ring-2 focus:ring-[#6B4EFF] focus:ring-offset-2 focus:ring-offset-[#FCFCFD]"
-          >
-            <span className="absolute inset-[-1000%] animate-[spin_2.5s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#111111_0%,#111111_45%,#4EA8FF_65%,#9B66FF_90%,#FFFFFF_100%)] group-hover:bg-[conic-gradient(from_90deg_at_50%_50%,#4EA8FF_0%,#9B66FF_50%,#4EA8FF_100%)] transition-all duration-500" />
-            <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-[#0A0A0A] px-5 py-2.5 text-[14px] font-medium text-white backdrop-blur-3xl transition-colors duration-300 group-hover:bg-[#151515]">
-              Zacznij projekt
-            </span>
-          </a>
+              {/* Electric Border Button */}
+              <a
+                href="/pakiety"
+                className="relative inline-flex h-10 overflow-hidden rounded-full p-[2px] group focus:outline-none focus:ring-2 focus:ring-[#6B4EFF] focus:ring-offset-2 focus:ring-offset-[#FCFCFD]"
+              >
+                <span className="absolute inset-[-1000%] animate-[spin_2.5s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#111111_0%,#111111_45%,#4EA8FF_65%,#9B66FF_90%,#FFFFFF_100%)] group-hover:bg-[conic-gradient(from_90deg_at_50%_50%,#4EA8FF_0%,#9B66FF_50%,#4EA8FF_100%)] transition-all duration-500" />
+                <span className="inline-flex h-full w-full items-center justify-center rounded-full bg-[#0A0A0A] px-5 py-2.5 text-[14px] font-medium text-white backdrop-blur-3xl transition-colors duration-300 group-hover:bg-[#151515]">
+                  Zacznij projekt
+                </span>
+              </a>
+            </>
+          )}
         </div>
       </div>
 
